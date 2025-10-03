@@ -1,0 +1,57 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tracker_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./app:/var/www/html/app
+      - ./vendor:/var/www/html/vendor
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - "${PHP_PORT}:80"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "${MYSQL_PORT}:3306"
+    networks:
+      - app-network
+
+  composer:
+    image: composer:latest
+    container_name: php_composer
+    volumes:
+      - .:/app
+    working_dir: /app
+    networks:
+      - app-network
+
+volumes:
+  dbdata:
+
+networks:
+  app-network:
+    driver: bridge
