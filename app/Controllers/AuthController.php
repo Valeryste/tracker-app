@@ -1,0 +1,71 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controllers;
+
+use App\Config\Database;
+use App\DTO\User\LoginDTO;
+use App\DTO\User\RegisterDTO;
+use App\Repositories\UserRepository;
+use App\Services\AuthService;
+use App\Validators\UserValidator;
+use JetBrains\PhpStorm\NoReturn;
+
+class AuthController
+{
+    private UserRepository $userRepository;
+
+    private AuthService $authService;
+
+    public function __construct()
+    {
+        $this->userRepository = new UserRepository(Database::getConnection());
+        $this->authService = new AuthService($this->userRepository);
+    }
+
+    #[NoReturn]
+    public function register(): void
+    {
+        if ($_SESSION['errors'] = (new UserValidator())->registration($_POST)) {
+            $this->redirect('/views/register.php');
+        }
+
+        $_SESSION['errors'] = $this->authService->register(new RegisterDTO(...$_POST));
+
+        $this->redirect('/views/register.php');
+    }
+
+    #[NoReturn]
+    public function login(): void
+    {
+        $redirectPath = '/views/login.php';
+        if ($_SESSION['errors'] = (new UserValidator())->login($_POST)) {
+            $this->redirect($redirectPath);
+        }
+
+        $_SESSION['response'] = $this->authService->login(new LoginDTO(...$_POST));
+
+        if(!$_SESSION['response']['success']) {
+            $this->redirect($redirectPath);
+        }
+
+        $this->redirect('/');
+    }
+
+    #[NoReturn]
+    public function logout(): void
+    {
+        $this->authService->logout();
+        header('Location: /?success=Logged out successfully');
+        exit;
+    }
+
+
+    #[NoReturn]
+    private function redirect(string $path) : void
+    {
+        header("Location: $path");
+        exit;
+    }
+}
