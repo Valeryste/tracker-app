@@ -10,6 +10,3 @@ try {
     Database::getConnection();
 } catch (Exception $e) {
 }
-
-echo "PHP Version: " . phpversion() . "<br>";
-?>
