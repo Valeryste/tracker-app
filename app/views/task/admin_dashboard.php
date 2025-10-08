@@ -10,7 +10,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
     <div class="tasks-section">
         <div class="card">
             <div class="card-header">
-                <h2>Данные заявок</h2>
+                <h2>Данные задач</h2>
                 <button id="refreshBtn" class="btn-refresh">
                     <span class="refresh-icon">↻</span> Обновить
                 </button>

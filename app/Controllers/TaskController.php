@@ -4,29 +4,33 @@ namespace App\Controllers;
 
 use App\DTO\Task\StoreDTO;
 use App\DTO\Task\UpdateDTO;
+use App\Services\StatusService;
 use App\Services\TaskService;
 use App\Validators\TaskValidator;
 
 class TaskController extends Controller
 {
     private TaskService $taskService;
+    private StatusService $statusService;
 
     public function __construct()
     {
         $this->taskService = new TaskService();
+        $this->statusService = new StatusService();
     }
 
     public function index() : false|string
     {
-        return json_encode([
+       return json_encode([
             'success' => true,
-            'data' => $this->taskService->getAllAsArray() ?? []
+            'data' => $this->taskService->getAllAsArray($_GET['sort']) ?? [],
+            'statuses' => $this->statusService->getAllAsArray()
         ]);
     }
 
     public function store(): false|string
     {
-        $data = json_decode(file_get_contents('php://input'), true) ?? $_POST;
+        $data = $_POST;
 
         if($errors = (new TaskValidator())->create($data))
         {
@@ -44,7 +48,7 @@ class TaskController extends Controller
 
     public function update(): false|string
     {
-        $data = json_decode(file_get_contents('php://input'), true) ?? $_POST;
+        $data = $_POST;
 
         $this->taskService->update(
             (new UpdateDTO(...$data))

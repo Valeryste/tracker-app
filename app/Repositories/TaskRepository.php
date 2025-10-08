@@ -21,9 +21,11 @@ class TaskRepository extends Repository
     /**
      * @return array
      */
-    public function getAllAsArray(): ?array
+    public function getAllAsArray(string $sort = 'newest'): ?array
     {
-        $stmt = $this->db->prepare('
+        $order = ($sort === 'oldest') ? 'ASC' : 'DESC';
+
+        $stmt = $this->db->prepare("
             SELECT 
                 t.*,
                 u.username as username,
@@ -36,7 +38,7 @@ class TaskRepository extends Repository
             LEFT JOIN task_tags tt ON t.id = tt.task_id
             LEFT JOIN tags ON tt.tag_id = tags.id
             GROUP BY t.id
-            ORDER BY t.id DESC'
+            ORDER BY t.created_at $order, t.id $order"
         );
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
