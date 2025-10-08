@@ -7,13 +7,6 @@ use PDO;
 
 class StatusRepository extends Repository
 {
-    private PDO $db;
-
-    public function __construct(PDO $db)
-    {
-        $this->db =$db;
-    }
-
     public function getAllAsArray(): ?array
     {
         $stmt = $this->db->prepare('SELECT id, name, slug FROM statuses');

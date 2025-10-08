@@ -10,13 +10,6 @@ use PDO;
 class TaskRepository extends Repository
 {
     const DEFAULT_STATUS_ID = 1;
-    private PDO $db;
-
-    public function __construct(PDO $db)
-    {
-        $this->db =$db;
-    }
-
 
     /**
      * @return array
