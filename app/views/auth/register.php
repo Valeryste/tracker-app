@@ -14,6 +14,7 @@ require_once '../layout/header.php';
                     id="username"
                     name="username"
                     placeholder="Красавчик92"
+                    required
                     value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"
             >
         </label>
@@ -26,6 +27,7 @@ require_once '../layout/header.php';
                     id="password"
                     name="password"
                     placeholder="******"
+                    required
             >
         </label>
         <div class="error"><?php echo $_SESSION['errors']['password'] ?? ''; ?></div>

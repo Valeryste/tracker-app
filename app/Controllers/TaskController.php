@@ -23,7 +23,10 @@ class TaskController extends Controller
     {
        return json_encode([
             'success' => true,
-            'data' => $this->taskService->getAllAsArray($_GET['sort'], $_GET['status']) ?? [],
+            'data' => $this->taskService->getAllAsArray(
+                $_GET['sort'] ?? '' ,
+                $_GET['status'] ?? null
+                ) ?? [],
             'statuses' => $this->statusService->getAllAsArray()
         ]);
     }

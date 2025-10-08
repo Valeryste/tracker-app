@@ -103,10 +103,10 @@ class TaskRepository extends Repository
                 ':admin_response' => $data['admin_response'] === '' ? null : $data['admin_response']
             ]);
 
-            if (!empty($data['tags'])) {
-                $stmt = $this->db->prepare('DELETE FROM task_tags WHERE task_id = :task_id');
-                $stmt->execute([':task_id' => $data['task_id']]);
+            $stmt = $this->db->prepare('DELETE FROM task_tags WHERE task_id = :task_id');
+            $stmt->execute([':task_id' => $data['task_id']]);
 
+            if (!empty($data['tags'])) {
                 $tagsStmt = $this->db->prepare('
                     INSERT INTO task_tags (task_id, tag_id) 
                     VALUES (:task_id, (SELECT id FROM tags WHERE slug = :tag_slug))
