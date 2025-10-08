@@ -7,10 +7,10 @@ require_once 'views/layout/header.php';
     <div class="container">
         <div class="nav">
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="actions/auth/logout.php" class="btn-logout">Выйти</a>
+                <a href="/logout" class="btn-logout">Выйти</a>
             <?php else: ?>
-                <a href="views/auth/login.php" class="btn-login">Войти</a>
-                <a href="views/auth/register.php" class="btn-register">Регистрация</a>
+                <a href="/login" class="btn-login">Войти</a>
+                <a href="/register" class="btn-register">Регистрация</a>
             <?php endif; ?>
         </div>
 

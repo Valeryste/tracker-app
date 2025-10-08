@@ -189,7 +189,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
         $('#tableBody').empty();
 
         $.ajax({
-            url: '../../actions/task/index.php',
+            url: '/app/actions/task/index.php',
             type: 'GET',
             dataType: 'json',
             data: currentFilters,
@@ -344,7 +344,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
             $('#saveChangesBtn').prop('disabled', true).text('Сохранение...');
 
             $.ajax({
-                url: '../../actions/task/update.php',
+                url: '/app/actions/task/update.php',
                 type: 'POST',
                 dataType: 'json',
                 data: formData,
