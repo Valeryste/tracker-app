@@ -16,9 +16,9 @@ class TaskService extends Service
         $this->taskRepository = new TaskRepository(Database::getConnection());
     }
 
-    public function getAllAsArray(string $sorted = null): ?array
+    public function getAllAsArray(string $sorted = null, ?string $statusForFilter = null): ?array
     {
-        return $this->taskRepository->getAllAsArray($sorted) ?: null;
+        return $this->taskRepository->getAllAsArray($sorted, $statusForFilter) ?: null;
     }
 
     public function store(StoreDTO $dataDTO): int

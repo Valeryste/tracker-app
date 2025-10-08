@@ -21,11 +21,11 @@ class TaskRepository extends Repository
     /**
      * @return array
      */
-    public function getAllAsArray(string $sort = 'newest'): ?array
+    public function getAllAsArray(string $sort = 'newest', ?string $statusForFilter = null): ?array
     {
         $order = ($sort === 'oldest') ? 'ASC' : 'DESC';
 
-        $stmt = $this->db->prepare("
+        $sql = "
             SELECT 
                 t.*,
                 u.username as username,
@@ -37,9 +37,20 @@ class TaskRepository extends Repository
             LEFT JOIN statuses s ON t.status_id = s.id
             LEFT JOIN task_tags tt ON t.id = tt.task_id
             LEFT JOIN tags ON tt.tag_id = tags.id
-            GROUP BY t.id
-            ORDER BY t.created_at $order, t.id $order"
-        );
+        ";
+
+        if ($statusForFilter !== null && $statusForFilter !== '') {
+            $sql .= " WHERE s.id = :status";
+        }
+
+        $sql .= " GROUP BY t.id ORDER BY t.created_at $order, t.id $order";
+
+        $stmt = $this->db->prepare($sql);
+
+        if ($statusForFilter !== null && $statusForFilter !== '') {
+            $stmt->bindParam(':status', $statusForFilter, PDO::PARAM_STR);
+        }
+
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: null;
     }

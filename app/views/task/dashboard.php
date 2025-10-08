@@ -192,8 +192,7 @@ $title = "Панель управления";
         $('#statusFilter, #sortOrder').change(function() {
             applyFilters();
         });
-
-        // Остальной код формы создания задачи
+        
         $('#createTaskForm').submit(function(e) {
             e.preventDefault();
 
