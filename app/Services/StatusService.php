@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace App\Services;
 
-use App\Config\Database;
+use App\Helpers\DatabaseHelper;
 use App\Repositories\StatusRepository;
 
 class StatusService extends Service
@@ -11,7 +11,7 @@ class StatusService extends Service
 
     public function __construct()
     {
-        $this->statusRepository = new StatusRepository(Database::getConnection());
+        $this->statusRepository = new StatusRepository(DatabaseHelper::getConnection());
     }
 
     public function getAllAsArray(): ?array

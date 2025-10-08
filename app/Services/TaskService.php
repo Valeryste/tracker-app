@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Config\Database;
 use App\DTO\Task\StoreDTO;
 use App\DTO\Task\UpdateDTO;
+use App\Helpers\DatabaseHelper;
 use App\Repositories\TaskRepository;
 
 class TaskService extends Service
@@ -13,7 +13,7 @@ class TaskService extends Service
 
     public function __construct()
     {
-        $this->taskRepository = new TaskRepository(Database::getConnection());
+        $this->taskRepository = new TaskRepository(DatabaseHelper::getConnection());
     }
 
     public function getAllAsArray(string $sorted = null, ?string $statusForFilter = null): ?array

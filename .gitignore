@@ -17,6 +17,3 @@ logs/
 Thumbs.db
 
 composer.phar
-
-*.sql
-*.backup

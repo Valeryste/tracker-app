@@ -1,4 +1,3 @@
-
 1.      git clone <repo url>
 
 2.      cp .env.example .env
@@ -21,6 +20,8 @@
 
 3.      docker-compose up -d
 4.      docker-compose run --rm composer install
+5.      docker-compose exec app vendor/bin/phinx migrate
+6.      docker-compose exec app vendor/bin/phinx seed:run
 Команды для базы данных:
 
     # Создание миграции

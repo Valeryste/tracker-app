@@ -44,7 +44,7 @@ require_once '../layout/header.php';
     </form>
 
     <div class="text-center">
-        <p>У меня уже есть <a href="login.php">аккаунт</a></p>
+        <p>У меня уже есть <a href="/login">аккаунт</a></p>
     </div>
 
 <?php
