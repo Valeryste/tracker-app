@@ -7,7 +7,6 @@ namespace App\Services;
 use App\Config\Database;
 use App\DTO\User\LoginDTO;
 use App\DTO\User\RegisterDTO;
-use App\Models\User;
 use App\Repositories\UserRepository;
 
 class AuthService extends Service
@@ -56,17 +55,9 @@ class AuthService extends Service
             ];
         }
 
-        $user = new User(
-            $userData['username'],
-            $userData['password'],
-            (bool)$userData['is_admin']
-        );
-
-        $user->setId((int)$userData['id']);
-
-        $_SESSION['user_id'] = $user->getId();
-        $_SESSION['username'] = $user->getUsername();
-        $_SESSION['is_admin'] = $user->isIsAdmin();
+        $_SESSION['user_id'] = (int)$userData['id'];
+        $_SESSION['username'] = $userData['username'];
+        $_SESSION['is_admin'] = (bool)$userData['is_admin'];
 
         return [
             'success' => true
