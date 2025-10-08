@@ -54,6 +54,4 @@ class TaskController extends Controller
             'success' => true,
         ]);
     }
-
-
 }

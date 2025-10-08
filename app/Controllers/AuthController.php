@@ -22,19 +22,20 @@ class AuthController extends Controller
     #[NoReturn]
     public function register(): void
     {
+        $redirectPath = '/views/auth/register.php';
         if ($_SESSION['errors'] = (new UserValidator())->registration($_POST)) {
-            $this->redirect('/views/register.php');
+            $this->redirect($redirectPath);
         }
 
         $_SESSION['errors'] = $this->authService->register(new RegisterDTO(...$_POST));
 
-        $this->redirect('/views/register.php');
+        $this->redirect($redirectPath);
     }
 
     #[NoReturn]
     public function login(): void
     {
-        $redirectPath = '/views/login.php';
+        $redirectPath = '/views/auth/login.php';
         if ($_SESSION['errors'] = (new UserValidator())->login($_POST)) {
             $this->redirect($redirectPath);
         }

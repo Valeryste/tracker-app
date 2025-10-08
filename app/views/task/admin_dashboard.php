@@ -1,5 +1,10 @@
 <?php
 $title = "Панель управления";
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== true) {
+    http_response_code(403);
+    die('Access denied');
+}
+
 ?>
 <div class="dashboard-container">
     <div class="tasks-section">

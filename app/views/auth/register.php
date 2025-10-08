@@ -1,7 +1,7 @@
 <?php
 session_start();
 $title = "Регистрация";
-require_once 'layout/header.php';
+require_once '../layout/header.php';
 ?>
 
     <form class="card" action="/actions/auth/register.php" method="post">
