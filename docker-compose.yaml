@@ -7,8 +7,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
-      - ./app:/var/www/html/app
-      - ./vendor:/var/www/html/vendor
+      - .:/var/www/html
       - ./config/php/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "${PHP_PORT}:80"
@@ -18,10 +17,18 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - APP_ENV=${APP_ENV}
+      - APP_DEBUG=${APP_DEBUG}
     networks:
       - app-network
     depends_on:
       - db
+    command: >
+      bash -c "
+        sed -i 's|/var/www/html|/var/www/html/app|g' /etc/apache2/sites-available/000-default.conf &&
+        sed -i 's|/var/www/html|/var/www/html/app|g' /etc/apache2/apache2.conf &&
+        apache2-foreground
+      "
 
   db:
     image: mysql:8.0
