@@ -7,4 +7,4 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use App\Controllers\TaskController;
 $controller = new TaskController();
-echo $controller->create();
+echo $controller->update();

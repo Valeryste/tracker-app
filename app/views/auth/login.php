@@ -1,7 +1,7 @@
 <?php
 session_start();
 $title = "Авторизация";
-require_once 'layout/header.php';
+require_once '../layout/header.php';
 ?>
 
     <form class="card" action="/actions/auth/login.php" method="post">
@@ -41,5 +41,5 @@ require_once 'layout/header.php';
 
 <?php
 $_SESSION['errors'] = [];
-require_once 'layout/footer.php';
+require_once '../layout/footer.php';
 ?>

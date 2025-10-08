@@ -302,3 +302,45 @@ body {
         justify-content: center;
     }
 }
+/* Стили для тегов */
+.tags-container {
+    margin-top: 0.5rem;
+}
+
+.tags-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-checkbox {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tag-checkbox input {
+    margin-right: 0.25rem;
+}
+
+.tag-checkbox:hover {
+    background: #e9ecef;
+}
+
+.tag-checkbox input:checked + span {
+    font-weight: bold;
+}
+
+.tag-badge {
+    display: inline-block;
+    background: #17a2b8;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin: 0.1rem;
+}

@@ -36,4 +36,6 @@
     docker-compose exec app vendor/bin/phinx seed:run
 
     
+Пользователь админ : username: admin, password: admintest
+    
  

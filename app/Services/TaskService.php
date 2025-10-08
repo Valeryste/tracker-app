@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\Config\Database;
-use App\DTO\Task\TaskDTO;
+use App\DTO\Task\StoreDTO;
+use App\DTO\Task\UpdateDTO;
 use App\Repositories\TaskRepository;
 
 class TaskService extends Service
@@ -20,12 +21,26 @@ class TaskService extends Service
         return $this->taskRepository->getAllAsArray() ?: null;
     }
 
-    public function create(TaskDTO $dataDTO): int
+    public function store(StoreDTO $dataDTO): int
     {
         return $this->taskRepository->create([
             'title' => $dataDTO->title,
             'description' => $dataDTO->description,
             'user_id' => $_SESSION['user_id']
         ]);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function update(UpdateDTO $dataDTO): void
+    {
+        $this->taskRepository->update([
+            'admin_response' => $dataDTO->admin_response,
+            'task_id' => $dataDTO->task_id,
+            'status' => $dataDTO->status,
+            'tags' => $dataDTO->tags
+        ]);
+
     }
 }

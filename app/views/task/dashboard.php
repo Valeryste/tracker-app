@@ -127,7 +127,7 @@ $title = "Панель управления";
             };
 
             $.ajax({
-                url: '../../actions/task/create.php',
+                url: '../../actions/task/store.php',
                 type: 'POST',
                 dataType: 'json',
                 data: formData,

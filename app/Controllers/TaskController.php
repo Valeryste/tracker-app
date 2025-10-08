@@ -2,7 +2,8 @@
 declare(strict_types=1);
 namespace App\Controllers;
 
-use App\DTO\Task\TaskDTO;
+use App\DTO\Task\StoreDTO;
+use App\DTO\Task\UpdateDTO;
 use App\Services\TaskService;
 use App\Validators\TaskValidator;
 
@@ -23,7 +24,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function create()
+    public function store(): false|string
     {
         $data = json_decode(file_get_contents('php://input'), true) ?? $_POST;
 
@@ -37,7 +38,20 @@ class TaskController extends Controller
 
         return json_encode([
             'success' => true,
-            'task_id' =>$this->taskService->create((new TaskDTO(...$data)))
+            'task_id' =>$this->taskService->store((new StoreDTO(...$data)))
+        ]);
+    }
+
+    public function update(): false|string
+    {
+        $data = json_decode(file_get_contents('php://input'), true) ?? $_POST;
+
+        $this->taskService->update(
+            (new UpdateDTO(...$data))
+        );
+
+        return json_encode([
+            'success' => true,
         ]);
     }
 

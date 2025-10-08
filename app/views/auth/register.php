@@ -41,5 +41,5 @@ require_once 'layout/header.php';
 
 <?php
 $_SESSION['errors'] = [];
-require_once 'layout/footer.php';
+require_once '../layout/footer.php';
 ?>
