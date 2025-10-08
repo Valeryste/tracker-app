@@ -1,4 +1,3 @@
-
 1.      git clone <repo url>
 
 2.      cp .env.example .env
@@ -21,4 +20,23 @@
 
 3.      docker-compose up -d
 4.      docker-compose run --rm composer install
+5.      docker-compose exec app vendor/bin/phinx migrate -c config/phinx/phinx.php
+6.      docker-compose exec app vendor/bin/phinx seed:run -c config/phinx/phinx.php
+Команды для базы данных:
+
+    # Создание миграции
+    docker-compose exec app vendor/bin/phinx create CreateUsersTable -c config/phinx/phinx.php
+
+    # Выполнение миграций
+    docker-compose exec app vendor/bin/phinx migrate -c config/phinx/phinx.php
+
+    # Откат миграций
+    docker-compose exec app vendor/bin/phinx rollback -c config/phinx/phinx.php
+
+    # Запуск сидеров
+    docker-compose exec app vendor/bin/phinx seed:run -c config/phinx/phinx.php
+
+    
+Пользователь админ : username: admin, password: admintest
+    
  

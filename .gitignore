@@ -14,7 +14,6 @@ logs/
 *.swo
 
 .DS_Store
-Thumbs.db
 
 composer.phar
 

@@ -1,0 +1,11 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^login$ views/auth/login.php [L]
+RewriteRule ^register$ views/auth/register.php [L]
+RewriteRule ^logout$ app/actions/auth/logout.php [L]
+
+RewriteRule ^(.*)$ index.php [QSA,L]
