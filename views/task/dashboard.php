@@ -89,7 +89,7 @@ $title = "Панель управления";
             $('#tableBody').empty();
 
             $.ajax({
-                url: '../../actions/task/index.php',
+                url: '/app/actions/task/index.php',
                 type: 'GET',
                 dataType: 'json',
                 data: currentFilters,
@@ -202,7 +202,7 @@ $title = "Панель управления";
             };
 
             $.ajax({
-                url: '../../actions/task/store.php',
+                url: '/app/actions/task/store.php',
                 type: 'POST',
                 dataType: 'json',
                 data: formData,

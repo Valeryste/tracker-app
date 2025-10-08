@@ -25,8 +25,8 @@ services:
       - db
     command: >
       bash -c "
-        sed -i 's|/var/www/html|/var/www/html/app|g' /etc/apache2/sites-available/000-default.conf &&
-        sed -i 's|/var/www/html|/var/www/html/app|g' /etc/apache2/apache2.conf &&
+        sed -i 's|/var/www/html|/var/www/html|g' /etc/apache2/sites-available/000-default.conf &&
+        sed -i 's|/var/www/html|/var/www/html|g' /etc/apache2/apache2.conf &&
         apache2-foreground
       "
 

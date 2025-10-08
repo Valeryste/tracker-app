@@ -35,7 +35,7 @@ class TaskController extends Controller
     {
         $data = $_POST;
 
-        if($errors = (new TaskValidator())->create($data))
+        if($errors = (new TaskValidator())->store($data))
         {
             return json_encode([
                 'success' => false,
@@ -49,9 +49,20 @@ class TaskController extends Controller
         ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function update(): false|string
     {
         $data = $_POST;
+
+        if($errors = (new TaskValidator())->update($data))
+        {
+            return json_encode([
+                'success' => false,
+                'errors' => $errors,
+            ]);
+        }
 
         $this->taskService->update(
             (new UpdateDTO(...$data))

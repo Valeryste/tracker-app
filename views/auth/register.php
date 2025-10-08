@@ -1,11 +1,11 @@
 <?php
 session_start();
-$title = "Авторизация";
+$title = "Регистрация";
 require_once '../layout/header.php';
 ?>
 
-    <form class="card" action="/actions/auth/login.php" method="post">
-        <h2>Авторизация</h2>
+    <form class="card" action="/app/actions/auth/register.php" method="post">
+        <h2>Регистрация</h2>
 
         <div class="form-group">
             <label for="username">
@@ -38,13 +38,13 @@ require_once '../layout/header.php';
             <div class="error"><?php echo $_SESSION['errors']['password'] ?? ''; ?></div>
         </div>
 
-        <div class="error"><?php echo $_SESSION['response']['errors'] ?? ''; ?></div>
+        <div class="error"><?php echo $_SESSION['errors']['message'] ?? ''; ?></div>
 
         <button type="submit" class="btn-primary" id="submit">Продолжить</button>
     </form>
 
     <div class="text-center">
-        <p>У меня нет аккаунта <a href="register.php">Создать аккаунт</a></p>
+        <p>У меня уже есть <a href="login.php">аккаунт</a></p>
     </div>
 
 <?php
