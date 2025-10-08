@@ -21,7 +21,7 @@
 
 3.      docker-compose up -d
 4.      docker-compose run --rm composer install
-Команды для миграций:
+Команды для базы данных:
 
     # Создание миграции
     docker-compose exec app vendor/bin/phinx create CreateUsersTable
@@ -31,4 +31,9 @@
 
     # Откат миграций
     docker-compose exec app vendor/bin/phinx rollback
+
+    # Запуск сидеров
+    docker-compose exec app vendor/bin/phinx seed:run
+
+    
  

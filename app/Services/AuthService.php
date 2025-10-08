@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Config\Database;
 use App\DTO\User\LoginDTO;
 use App\DTO\User\RegisterDTO;
 use App\Models\User;
@@ -13,9 +14,9 @@ class AuthService extends Service
 {
     private UserRepository $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct()
     {
-        $this->userRepository = $userRepository;
+        $this->userRepository = new UserRepository(Database::getConnection());
     }
 
     public function register(RegisterDTO $registerDTO): array

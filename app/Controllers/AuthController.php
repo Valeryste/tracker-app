@@ -4,24 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Config\Database;
 use App\DTO\User\LoginDTO;
 use App\DTO\User\RegisterDTO;
-use App\Repositories\UserRepository;
 use App\Services\AuthService;
 use App\Validators\UserValidator;
 use JetBrains\PhpStorm\NoReturn;
 
-class AuthController
+class AuthController extends Controller
 {
-    private UserRepository $userRepository;
-
     private AuthService $authService;
 
     public function __construct()
     {
-        $this->userRepository = new UserRepository(Database::getConnection());
-        $this->authService = new AuthService($this->userRepository);
+        $this->authService = new AuthService();
     }
 
     #[NoReturn]
