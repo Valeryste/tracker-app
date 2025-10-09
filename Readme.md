@@ -1,4 +1,4 @@
-1.      git clone <repo url>
+1.      git clone https://github.com/Valeryste/tracker-app.git
 
 2.      cp .env.example .env
 
